@@ -1,11 +1,11 @@
-My changes in fork patch 1
-Panda/board/safety/safety_hyundai.h Line 1 (255 to 409) #increased max steer torque limit.
-selfdrive/car/hyundai/interface.py line 251 (False to True) #Enabled auto lane change
-selfdrive/controls/lib/driver_monitor.py Line 17 (70 to 1800) #Increased wheel nag time)
-selfdrive/controls/lib/driver_monitor.py Line 18 (15 to 25) #increased warning time
-selfdrive/controls/lib/driver_monitor.py Line 19 (6 to 15) #increased warning time
-selfdrive/controls/lib/events.py line 486,490 (AudibleAlert.chimeEngage to  AudibleAlert.none) #no engage sound
-selfdrive/controls/lib/events.py line 494,498,502,507,512,518,579,617,623,644,687,715,724,747 (AudibleAlert.chimeDisengage to  AudibleAlert.none) #no disengage sound
+- <b>My changes in fork patch 1.
+- <b>Panda/board/safety/safety_hyundai.h Line 1 (255 to 409) #increased max steer torque limit.
+- <b>selfdrive/car/hyundai/interface.py line 251 (False to True) #Enabled auto lane change.
+- <b>selfdrive/controls/lib/driver_monitor.py Line 17 (70 to 1800) #Increased wheel nag time.
+- <b>selfdrive/controls/lib/driver_monitor.py Line 18 (15 to 25) #increased warning time.
+- <b>selfdrive/controls/lib/driver_monitor.py Line 19 (6 to 15) #increased warning time.
+- <b>selfdrive/controls/lib/events.py line 486,490 (AudibleAlert.chimeEngage to  AudibleAlert.none) #no engage sound.
+- <b>selfdrive/controls/lib/events.py line 494,498,502,507,512,518,579,617,623,644,687,715,724,747 (AudibleAlert.chimeDisengage to  AudibleAlert.none) #no disengage sound.
 
 HKG Community information
 ======
