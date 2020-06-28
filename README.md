@@ -1,5 +1,6 @@
 - <b>My changes in fork patch 1.
 - <b>Panda/board/safety/safety_hyundai.h Line 1 (255 to 409) #increased max steer torque limit.
+- <b>selfdrive/car/hyundai/values.py Line 7 (255 to 409) #increased max steer torque limit.
 - <b>selfdrive/car/hyundai/interface.py line 251 (False to True) #Enabled auto lane change.
 - <b>selfdrive/controls/lib/driver_monitor.py Line 17 (70 to 1800) #Increased wheel nag time.
 - <b>selfdrive/controls/lib/driver_monitor.py Line 18 (15 to 25) #increased warning time.
