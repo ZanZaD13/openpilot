@@ -1,7 +1,7 @@
-const int HYUNDAI_MAX_STEER = 408;             // like stock
+const int HYUNDAI_MAX_STEER = 409;             // like stock
 const int HYUNDAI_MAX_RT_DELTA = 112;          // max delta torque allowed for real time checks
 const uint32_t HYUNDAI_RT_INTERVAL = 250000;   // 250ms between real time checks
-const int HYUNDAI_MAX_RATE_UP = 3;
+const int HYUNDAI_MAX_RATE_UP = 4;
 const int HYUNDAI_MAX_RATE_DOWN = 7;
 const int HYUNDAI_DRIVER_TORQUE_ALLOWANCE = 50;
 const int HYUNDAI_DRIVER_TORQUE_FACTOR = 2;
@@ -102,7 +102,7 @@ static int hyundai_rx_hook(CAN_FIFOMailBox_TypeDef *to_push) {
                                  hyundai_get_checksum, hyundai_compute_checksum,
                                  hyundai_get_counter);
 
-  bool unsafe_allow_gas = unsafe_mode & UNSAFE_DISABLE_DISENGAGE_ON_GAS;
+ // bool unsafe_allow_gas = unsafe_mode & UNSAFE_DISABLE_DISENGAGE_ON_GAS;
 
   int addr = GET_ADDR(to_push);
   int bus = GET_BUS(to_push);
@@ -136,19 +136,19 @@ static int hyundai_rx_hook(CAN_FIFOMailBox_TypeDef *to_push) {
     }
 
     // enter controls on rising edge of ACC, exit controls on ACC off
-    if (addr == 1057 && OP_SCC_live && (bus != 1 || !hyundai_LCAN_on_bus1)) { // for cars with long control
-      hyundai_has_scc = true;
-      car_SCC_live = 50;
-      // 2 bits: 13-14
-      int cruise_engaged = (GET_BYTES_04(to_push) >> 13) & 0x3;
-      if (cruise_engaged && !cruise_engaged_prev) {
-        controls_allowed = 1;
-      }
-      if (!cruise_engaged) {
-        controls_allowed = 0;
-      }
-      cruise_engaged_prev = cruise_engaged;
-    }
+  //  if (addr == 1057 && OP_SCC_live && (bus != 1 || !hyundai_LCAN_on_bus1)) { // for cars with long control
+   //   hyundai_has_scc = true;
+    //  car_SCC_live = 50;
+   //   // 2 bits: 13-14
+   //   int cruise_engaged = (GET_BYTES_04(to_push) >> 13) & 0x3;
+   //   if (cruise_engaged && !cruise_engaged_prev) {
+   //     controls_allowed = 1;
+    //  }
+   //   if (!cruise_engaged) {
+   //     controls_allowed = 0;
+   //   }
+   //   cruise_engaged_prev = cruise_engaged;
+  //  }
     if (addr == 1056 && !OP_SCC_live && (bus != 1 || !hyundai_LCAN_on_bus1)) { // for cars without long control
       hyundai_has_scc = true;
       // 2 bits: 13-14
@@ -189,13 +189,13 @@ static int hyundai_rx_hook(CAN_FIFOMailBox_TypeDef *to_push) {
       cruise_engaged_prev = cruise_button;
     }
     // exit controls on rising edge of gas press for cars with long control
-    if (addr == 608 && OP_SCC_live && bus == 0) {
-      bool gas_pressed = (GET_BYTE(to_push, 7) >> 6) != 0;
-      if (!unsafe_allow_gas && gas_pressed && !gas_pressed_prev) {
-        controls_allowed = 0;
-      }
-      gas_pressed_prev = gas_pressed;
-    }
+ //   if (addr == 608 && OP_SCC_live && bus == 0) {
+ //     bool gas_pressed = (GET_BYTE(to_push, 7) >> 6) != 0;
+ //     if (!unsafe_allow_gas && gas_pressed && !gas_pressed_prev) {
+ //       controls_allowed = 0;
+ //     }
+ //     gas_pressed_prev = gas_pressed;
+ //   }
 
     // sample subaru wheel speed, averaging opposite corners
     if (addr == 902 && bus == 0) {
@@ -206,13 +206,13 @@ static int hyundai_rx_hook(CAN_FIFOMailBox_TypeDef *to_push) {
     }
 
     // exit controls on rising edge of brake press for cars with long control
-    if (addr == 916 && OP_SCC_live && bus == 0) {
-      bool brake_pressed = (GET_BYTE(to_push, 6) >> 7) != 0;
-      if (brake_pressed && (!brake_pressed_prev || vehicle_moving)) {
-        controls_allowed = 0;
-      }
-      brake_pressed_prev = brake_pressed;
-    }
+//    if (addr == 916 && OP_SCC_live && bus == 0) {
+//      bool brake_pressed = (GET_BYTE(to_push, 6) >> 7) != 0;
+//      if (brake_pressed && (!brake_pressed_prev || vehicle_moving)) {
+//        controls_allowed = 0;
+//      }
+//      brake_pressed_prev = brake_pressed;
+//    }
 
     // check if stock camera ECU is on bus 0
     if ((safety_mode_cnt > RELAY_TRNS_TIMEOUT) && bus == 0 && addr == 832) {
