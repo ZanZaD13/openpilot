@@ -156,14 +156,14 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
       ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.05]]
     elif candidate == CAR.KIA_CEED:
-      ret.steerActuatorDelay = 0.4  # Default delay
+      ret.steerActuatorDelay = 0.2  # Default delay
       ret.lateralTuning.pid.kf = 0.00005
       ret.mass = 1450. + STD_CARGO_KG
       ret.wheelbase = 2.65
-      ret.steerRatio = 13.75
+      ret.steerRatio = 13.75 * 1.15
       tire_stiffness_factor = 0.5
-      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.13], [0.005]]
+      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0., 40.], [0., 40.]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.01, .13], [0.0005, 0.005]]
     elif candidate == CAR.KIA_SPORTAGE:
       ret.lateralTuning.pid.kf = 0.00005
       ret.mass = 1985. + STD_CARGO_KG
