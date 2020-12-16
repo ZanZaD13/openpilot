@@ -1,3 +1,11 @@
+My Changes:
+
+Enable controls on RES when MADmode is enabled.
+To not engage controls on ACC button when MADmode is enabled
+
+
+
+
 HKG Community information
 ======
 
