@@ -183,7 +183,7 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
       ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.05]]
     elif candidate == CAR.CEED:
-      ret.mass = 1350. + STD_CARGO_KG
+      ret.mass = 1450. + STD_CARGO_KG
       ret.wheelbase = 2.65
       ret.steerRatio = 13.75
       tire_stiffness_factor = 0.5
@@ -286,7 +286,7 @@ class CarInterface(CarInterfaceBase):
 
     # most HKG cars has no long control, it is safer and easier to engage by main on
     if self.mad_mode_enabled and not self.CC.longcontrol:
-      ret.cruiseState.enabled = ret.cruiseState.available
+      ret.cruiseState.available = ret.cruiseState.available
 
     # turning indicator alert logic
     if (ret.leftBlinker or ret.rightBlinker or self.CC.turning_signal_timer) and ret.vEgo < LANE_CHANGE_SPEED_MIN - 1.2:
